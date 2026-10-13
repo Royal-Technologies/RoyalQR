@@ -470,13 +470,17 @@ const RoyalApp = {
     const previewBox = document.getElementById("custom-logo-preview-box");
     if (previewBox) {
       previewBox.innerHTML = `
-        <img src="${dataUrl}" class="custom-logo-preview-thumb" alt="Custom Logo" />
-        <div class="custom-logo-preview-info">
-          <span style="font-size: 11px; color: #94A3B8; font-weight: 500;">Logo Active</span>
-          <button type="button" class="custom-logo-remove-btn" onclick="RoyalApp.clearCustomLogo()">✕ Remove</button>
+        <div class="custom-logo-preview-card">
+          <div class="custom-logo-img-wrap">
+            <img src="${dataUrl}" class="custom-logo-preview-img" alt="Uploaded Custom Logo" />
+          </div>
+          <div class="custom-logo-card-footer">
+            <span class="custom-logo-status-tag">● Active Logo</span>
+            <button type="button" class="custom-logo-remove-btn" onclick="RoyalApp.clearCustomLogo()">✕ Remove</button>
+          </div>
         </div>
       `;
-      previewBox.style.display = "flex";
+      previewBox.style.display = "block";
     }
     const currentSize = parseFloat(document.getElementById("logoSize")?.value || 0.20);
     this.scheduleRender({ logoKey: "custom", customLogoUrl: dataUrl, logoSize: currentSize });

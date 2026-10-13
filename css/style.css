@@ -528,31 +528,57 @@ html.light .brand-text h1 {
 }
 
 .custom-logo-preview-box {
-  display: flex;
-  align-items: center;
+  margin-top: 10px;
+}
+
+.custom-logo-preview-card {
+  display: inline-flex;
+  flex-direction: column;
   gap: 10px;
   background: var(--bg-card);
   border: 1px solid var(--bg-card-border);
-  padding: 6px 12px;
   border-radius: var(--radius-md);
-  margin-top: 8px;
-  width: fit-content;
+  padding: 12px;
+  max-width: 224px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
-.custom-logo-preview-thumb {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  background: #ffffff;
-  border-radius: 4px;
-  padding: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.custom-logo-preview-info {
+.custom-logo-img-wrap {
+  width: 100%;
+  max-width: 200px;
+  min-height: 60px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background: repeating-conic-gradient(rgba(255, 255, 255, 0.05) 0% 25%, transparent 0% 50%) 50% / 14px 14px;
+  border: 1px dashed var(--bg-card-border);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+}
+
+.custom-logo-preview-img {
+  max-width: 200px;
+  max-height: 120px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.custom-logo-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
+}
+
+.custom-logo-status-tag {
+  font-size: 11px;
+  color: #10B981;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .custom-logo-remove-btn {
@@ -561,7 +587,7 @@ html.light .brand-text h1 {
   border: 1px solid rgba(239, 68, 68, 0.3);
   font-size: 11px;
   font-weight: 700;
-  padding: 3px 8px;
+  padding: 4px 8px;
   border-radius: 4px;
   cursor: pointer;
   transition: var(--transition);
