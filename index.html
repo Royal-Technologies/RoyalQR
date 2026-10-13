@@ -32,6 +32,9 @@
         <button type="button" class="tool-btn btn-presets" onclick="RoyalApp.openModal('templates-modal')">
           <span>✨</span> Presets / Templates
         </button>
+        <button type="button" class="tool-btn" style="background: rgba(37, 99, 235, 0.2); border-color: #3B82F6; color: #60A5FA;" onclick="RoyalApp.jumpToPreview()" title="Jump to QR Preview">
+          <span>📱</span> Live Preview
+        </button>
         <button type="button" class="tool-btn" onclick="RoyalApp.toggleHistoryDrawer()">
           <span>🕒</span> Saved (<span id="history-count">0</span>)
         </button>
@@ -612,7 +615,10 @@
         <div class="preview-card">
           <!-- Live Header & Scannability Meter -->
           <div class="preview-header">
-            <span class="text-sm font-bold tracking-tight">Live Interactive Preview</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="live-pulse-badge"><span class="pulse-dot"></span> LIVE</span>
+              <span class="text-sm font-bold tracking-tight">QR Code Preview</span>
+            </div>
             <div id="scannability-badge" class="quality-badge quality-excellent">
               <span>✓</span> <span>100% Readable</span>
             </div>

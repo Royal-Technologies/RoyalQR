@@ -140,40 +140,43 @@ class RoyalQRGenerator {
     const config = this.currentConfig;
     if (!this.container) return;
 
-    // Check if frame is enabled
     const hasFrame = config.frame && config.frame !== "none";
-
-    // Frame wrapper container
     const previewSize = 340;
     const qrOptions = this.buildQrStylingOptions(config, previewSize);
 
-    // Create a temporary off-screen container for qr-code-styling
-    const tempDiv = document.createElement("div");
-    const qr = new QRCodeStyling(qrOptions);
-    qr.append(tempDiv);
-
-    // Wait for internal drawing
-    await new Promise(resolve => setTimeout(resolve, 60));
-
-    const qrCanvas = tempDiv.querySelector("canvas");
-    if (!qrCanvas) return;
-
     if (!hasFrame) {
+      // Direct native render without frame overhead
       this.container.innerHTML = "";
-      this.container.appendChild(qrCanvas);
-      this.container.style.padding = "0px";
-      this.container.style.backgroundColor = "transparent";
-      this.container.style.border = "none";
-      this.container.style.boxShadow = "none";
+      const qr = new QRCodeStyling(qrOptions);
+      qr.append(this.container);
+      this.qrInstance = qr;
     } else {
-      // Compose with frame onto preview canvas
-      const framedCanvas = await this.composeFramedCanvas(qrCanvas, config, previewSize);
-      this.container.innerHTML = "";
-      this.container.appendChild(framedCanvas);
+      // Compose with frame
+      const qr = new QRCodeStyling(qrOptions);
+      this.qrInstance = qr;
+      try {
+        const blob = await qr.getRawData("png");
+        if (!blob) throw new Error("Could not get QR blob");
+        const img = new Image();
+        const url = URL.createObjectURL(blob);
+        await new Promise((resolve, reject) => {
+          img.onload = () => { URL.revokeObjectURL(url); resolve(); };
+          img.onerror = reject;
+          img.src = url;
+        });
+
+        const framedCanvas = await this.composeFramedCanvas(img, config, previewSize);
+        this.container.innerHTML = "";
+        this.container.appendChild(framedCanvas);
+      } catch (err) {
+        console.warn("Frame compositing fallback:", err);
+        this.container.innerHTML = "";
+        qr.append(this.container);
+      }
     }
 
-    // Trigger quality & scan status check
-    this.evaluateScannability();
+    // Evaluate scannability
+    setTimeout(() => this.evaluateScannability(), 80);
   }
 
   /**
@@ -185,8 +188,8 @@ class RoyalQRGenerator {
     const frameBg = config.frameBgColor || "#1E293B";
     const frameTextColor = config.frameTextColor || "#FBBF24";
 
-    const qrW = sourceCanvas.width;
-    const qrH = sourceCanvas.height;
+    const qrW = sourceCanvas.naturalWidth || sourceCanvas.width || 340;
+    const qrH = sourceCanvas.naturalHeight || sourceCanvas.height || 340;
 
     // Calculate dimensions based on frame type
     let canvasW, canvasH, qrX, qrY, textX, textY, bannerRect;

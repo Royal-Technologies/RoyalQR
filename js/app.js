@@ -674,6 +674,13 @@ const RoyalApp = {
 
   copyClipboard() {
     this.generator.copyToClipboard();
+  },
+
+  jumpToPreview() {
+    const el = document.querySelector(".preview-sticky-col");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 };
 
