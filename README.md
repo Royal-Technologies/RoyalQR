@@ -107,3 +107,14 @@ RoyalQR/
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE) — free to use for personal, commercial, and client projects.
+
+---
+
+## 🏢 Developed & Maintained by
+
+**[Royal Technologies](https://www.royaltechbd.com)**  
+*Innovating Next-Generation Digital Experiences.*
+
+- 📍 **Address**: D - 408, Housing Estate, Kushtia 7000, Bangladesh
+- ✉️ **Email**: [info@royaltechbd.com](mailto:info@royaltechbd.com)
+- 🌐 **Website**: [https://www.royaltechbd.com](https://www.royaltechbd.com)
