@@ -470,12 +470,16 @@ const RoyalApp = {
     const previewBox = document.getElementById("custom-logo-preview-box");
     if (previewBox) {
       previewBox.innerHTML = `
-        <img src="${dataUrl}" class="w-8 h-8 object-contain rounded" />
-        <button type="button" class="text-xs text-rose-400 hover:text-rose-300 ml-2" onclick="RoyalApp.clearCustomLogo()">Remove</button>
+        <img src="${dataUrl}" class="custom-logo-preview-thumb" alt="Custom Logo" />
+        <div class="custom-logo-preview-info">
+          <span style="font-size: 11px; color: #94A3B8; font-weight: 500;">Logo Active</span>
+          <button type="button" class="custom-logo-remove-btn" onclick="RoyalApp.clearCustomLogo()">✕ Remove</button>
+        </div>
       `;
       previewBox.style.display = "flex";
     }
-    this.scheduleRender({ logoKey: "custom", customLogoUrl: dataUrl });
+    const currentSize = parseFloat(document.getElementById("logoSize")?.value || 0.20);
+    this.scheduleRender({ logoKey: "custom", customLogoUrl: dataUrl, logoSize: currentSize });
     this.showToast("Logo uploaded successfully!");
   },
 

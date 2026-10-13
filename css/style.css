@@ -527,6 +527,51 @@ html.light .brand-text h1 {
   height: 22px;
 }
 
+.custom-logo-preview-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  margin-top: 8px;
+  width: fit-content;
+}
+
+.custom-logo-preview-thumb {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.custom-logo-preview-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-logo-remove-btn {
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.custom-logo-remove-btn:hover {
+  background: #EF4444;
+  color: white;
+}
+
 /* Right Sticky Preview Column */
 .preview-sticky-col {
   position: sticky;

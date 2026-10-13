@@ -34,7 +34,7 @@ class RoyalQRGenerator {
       // Logo / Center Image
       logoKey: "crown", // preset key or 'custom' or 'none'
       customLogoUrl: null,
-      logoSize: 0.36,
+      logoSize: 0.20,
       logoMargin: 6,
       hideBackgroundDots: true,
       // Frame / Badge
