@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoyalQR Studio - Next-Gen Custom QR Code Generator</title>
+  <meta name="description" content="Create stunning, high-resolution custom QR codes with colors, gradients, frames, logos, and shapes. 100% client-side, free forever, deployable on GitHub Pages." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F59E0B'><path d='M2 20h20v2H2v-2zm2-2l3-11 5 6 5-6 3 11H4zm6.5-9.3l-2.7-3.2 2.7-.9 2.5 3.3-2.5.8z'/></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-wrapper">
+        <div class="brand-logo-icon">👑</div>
+        <div class="brand-text">
+          <h1>RoyalQR Studio</h1>
+          <div class="brand-subtitle">The Ultimate High-Resolution Custom QR Code Studio • 100% Client-Side</div>
+        </div>
+      </div>
+
+      <div class="header-toolbar">
+        <button type="button" class="tool-btn btn-presets" onclick="RoyalApp.openModal('templates-modal')">
+          <span>✨</span> Presets / Templates
+        </button>
+        <button type="button" class="tool-btn" onclick="RoyalApp.toggleHistoryDrawer()">
+          <span>🕒</span> Saved (<span id="history-count">0</span>)
+        </button>
+        <button type="button" class="tool-btn" onclick="RoyalApp.randomizeDesign()" title="Randomize a cool style">
+          <span>🎲</span> Randomize
+        </button>
+        <button type="button" class="tool-btn" onclick="RoyalApp.resetAll()" title="Reset to default">
+          <span>🔄</span> Reset
+        </button>
+        <button type="button" class="tool-btn" onclick="RoyalApp.toggleTheme()" title="Toggle Dark/Light mode">
+          <span>🌓</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Studio Grid -->
+    <main class="studio-grid">
+      <!-- Left Column: Customization Controls -->
+      <section class="studio-card">
+        
+        <!-- 1. Content Type Selector Bar -->
+        <div class="type-selector-bar">
+          <button type="button" class="type-btn active" data-type="url" onclick="RoyalApp.switchTypeTab('url')">
+            <span>🔗</span> Website URL
+          </button>
+          <button type="button" class="type-btn" data-type="text" onclick="RoyalApp.switchTypeTab('text')">
+            <span>📝</span> Plain Text
+          </button>
+          <button type="button" class="type-btn" data-type="wifi" onclick="RoyalApp.switchTypeTab('wifi')">
+            <span>📶</span> Wi-Fi Network
+          </button>
+          <button type="button" class="type-btn" data-type="vcard" onclick="RoyalApp.switchTypeTab('vcard')">
+            <span>👤</span> vCard / Contact
+          </button>
+          <button type="button" class="type-btn" data-type="whatsapp" onclick="RoyalApp.switchTypeTab('whatsapp')">
+            <span>💬</span> WhatsApp
+          </button>
+          <button type="button" class="type-btn" data-type="email" onclick="RoyalApp.switchTypeTab('email')">
+            <span>📧</span> Email
+          </button>
+          <button type="button" class="type-btn" data-type="phone" onclick="RoyalApp.switchTypeTab('phone')">
+            <span>📞</span> Phone
+          </button>
+          <button type="button" class="type-btn" data-type="sms" onclick="RoyalApp.switchTypeTab('sms')">
+            <span>💬</span> SMS
+          </button>
+          <button type="button" class="type-btn" data-type="crypto" onclick="RoyalApp.switchTypeTab('crypto')">
+            <span>💰</span> Crypto
+          </button>
+          <button type="button" class="type-btn" data-type="social" onclick="RoyalApp.switchTypeTab('social')">
+            <span>🌐</span> Socials
+          </button>
+          <button type="button" class="type-btn" data-type="event" onclick="RoyalApp.switchTypeTab('event')">
+            <span>📅</span> Event
+          </button>
+        </div>
+
+        <!-- Content Form Panels -->
+        <div class="content-forms-wrapper">
+          <!-- URL Form -->
+          <div id="form-url" class="type-form-panel active">
+            <div class="form-group">
+              <label class="form-label" for="input-url">Enter Website URL</label>
+              <input type="url" id="input-url" class="form-input form-input-trigger" placeholder="https://example.com" value="https://github.com" />
+              <div class="form-hint">Smart formatting automatically adds https:// if omitted.</div>
+            </div>
+          </div>
+
+          <!-- Plain Text Form -->
+          <div id="form-text" class="type-form-panel">
+            <div class="form-group">
+              <label class="form-label" for="input-text">Text Content</label>
+              <textarea id="input-text" class="form-textarea form-input-trigger" rows="3" placeholder="Enter any text, note, secret message or quote..."></textarea>
+            </div>
+          </div>
+
+          <!-- Wi-Fi Form -->
+          <div id="form-wifi" class="type-form-panel">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="wifi-ssid">Network Name (SSID)</label>
+                <input type="text" id="wifi-ssid" class="form-input form-input-trigger" placeholder="e.g. Home_5G" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="wifi-enc">Encryption</label>
+                <select id="wifi-enc" class="form-select form-input-trigger">
+                  <option value="WPA" selected>WPA/WPA2/WPA3</option>
+                  <option value="WEP">WEP</option>
+                  <option value="nopass">None (Open)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wifi-pass">Wi-Fi Password</label>
+              <input type="text" id="wifi-pass" class="form-input form-input-trigger" placeholder="Network password" />
+            </div>
+            <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+              <input type="checkbox" id="wifi-hidden" class="form-input-trigger" />
+              <label for="wifi-hidden" style="font-size: 13px; cursor: pointer;">Hidden network (SSID is not broadcast)</label>
+            </div>
+          </div>
+
+          <!-- vCard Form -->
+          <div id="form-vcard" class="type-form-panel">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="vcard-first">First Name</label>
+                <input type="text" id="vcard-first" class="form-input form-input-trigger" placeholder="John" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="vcard-last">Last Name</label>
+                <input type="text" id="vcard-last" class="form-input form-input-trigger" placeholder="Doe" />
+              </div>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="vcard-phone">Mobile Phone</label>
+                <input type="tel" id="vcard-phone" class="form-input form-input-trigger" placeholder="+1234567890" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="vcard-email">Email Address</label>
+                <input type="email" id="vcard-email" class="form-input form-input-trigger" placeholder="john@example.com" />
+              </div>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="vcard-org">Organization / Company</label>
+                <input type="text" id="vcard-org" class="form-input form-input-trigger" placeholder="Acme Inc." />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="vcard-title">Job Title</label>
+                <input type="text" id="vcard-title" class="form-input form-input-trigger" placeholder="Creative Director" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="vcard-url">Website</label>
+              <input type="url" id="vcard-url" class="form-input form-input-trigger" placeholder="https://example.com" />
+            </div>
+          </div>
+
+          <!-- WhatsApp Form -->
+          <div id="form-whatsapp" class="type-form-panel">
+            <div class="form-group">
+              <label class="form-label" for="wa-phone">WhatsApp Number (with country code, no +)</label>
+              <input type="text" id="wa-phone" class="form-input form-input-trigger" placeholder="e.g. 8801700000000" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wa-msg">Pre-filled Message (Optional)</label>
+              <textarea id="wa-msg" class="form-textarea form-input-trigger" rows="2" placeholder="Hi! I am contacting you from your QR code."></textarea>
+            </div>
+          </div>
+
+          <!-- Email Form -->
+          <div id="form-email" class="type-form-panel">
+            <div class="form-group">
+              <label class="form-label" for="email-to">Recipient Email</label>
+              <input type="email" id="email-to" class="form-input form-input-trigger" placeholder="support@company.com" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email-subject">Subject</label>
+              <input type="text" id="email-subject" class="form-input form-input-trigger" placeholder="Inquiry about services" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email-body">Email Body</label>
+              <textarea id="email-body" class="form-textarea form-input-trigger" rows="2" placeholder="Hello, I would like to know more about..."></textarea>
+            </div>
+          </div>
+
+          <!-- Phone Form -->
+          <div id="form-phone" class="type-form-panel">
+            <div class="form-group">
+              <label class="form-label" for="phone-number">Phone Number</label>
+              <input type="tel" id="phone-number" class="form-input form-input-trigger" placeholder="+1 (555) 000-1122" />
+            </div>
+          </div>
+
+          <!-- SMS Form -->
+          <div id="form-sms" class="type-form-panel">
+            <div class="form-group">
+              <label class="form-label" for="sms-phone">Phone Number</label>
+              <input type="tel" id="sms-phone" class="form-input form-input-trigger" placeholder="+1234567890" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="sms-msg">Message</label>
+              <textarea id="sms-msg" class="form-textarea form-input-trigger" rows="2" placeholder="Send me more info please"></textarea>
+            </div>
+          </div>
+
+          <!-- Crypto Form -->
+          <div id="form-crypto" class="type-form-panel">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="crypto-coin">Cryptocurrency</label>
+                <select id="crypto-coin" class="form-select form-input-trigger">
+                  <option value="bitcoin">Bitcoin (BTC)</option>
+                  <option value="ethereum">Ethereum (ETH)</option>
+                  <option value="usdt">USDT / Other Address</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="crypto-amt">Amount (Optional)</label>
+                <input type="text" id="crypto-amt" class="form-input form-input-trigger" placeholder="0.05" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="crypto-addr">Wallet Address</label>
+              <input type="text" id="crypto-addr" class="form-input form-input-trigger" placeholder="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" />
+            </div>
+          </div>
+
+          <!-- Socials Form -->
+          <div id="form-social" class="type-form-panel">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="social-platform">Platform</label>
+                <select id="social-platform" class="form-select form-input-trigger">
+                  <option value="instagram">Instagram</option>
+                  <option value="youtube">YouTube</option>
+                  <option value="tiktok">TikTok</option>
+                  <option value="x">X (Twitter)</option>
+                  <option value="linkedin">LinkedIn</option>
+                  <option value="github">GitHub</option>
+                  <option value="facebook">Facebook</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="social-user">Username or Full Profile Link</label>
+                <input type="text" id="social-user" class="form-input form-input-trigger" placeholder="@username" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Form -->
+          <div id="form-event" class="type-form-panel">
+            <div class="form-group">
+              <label class="form-label" for="event-title">Event Title</label>
+              <input type="text" id="event-title" class="form-input form-input-trigger" placeholder="Royal Grand Gala" />
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="event-start">Start Date/Time</label>
+                <input type="datetime-local" id="event-start" class="form-input form-input-trigger" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="event-end">End Date/Time</label>
+                <input type="datetime-local" id="event-end" class="form-input form-input-trigger" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="event-location">Location</label>
+              <input type="text" id="event-location" class="form-input form-input-trigger" placeholder="Grand Ballroom, NYC" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Master Styling Accordions -->
+        <div class="accordion-wrapper">
+
+          <!-- Section: Dot Patterns & Colors -->
+          <div id="section-dots" class="accordion-section is-open">
+            <div class="accordion-header" onclick="RoyalApp.switchAccordion('dots')">
+              <span>🎨 Body Pattern & Dot Colors</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <label class="form-label">Dot Shape Pattern</label>
+              <div class="visual-btn-grid">
+                <button type="button" class="visual-choice-btn dot-style-btn active" data-dot="classy-rounded">
+                  <span class="sample-dot-icon">✨</span>
+                  <span>Classy R.</span>
+                </button>
+                <button type="button" class="visual-choice-btn dot-style-btn" data-dot="rounded">
+                  <span class="sample-dot-icon">●</span>
+                  <span>Rounded</span>
+                </button>
+                <button type="button" class="visual-choice-btn dot-style-btn" data-dot="dots">
+                  <span class="sample-dot-icon">⚫</span>
+                  <span>Dots</span>
+                </button>
+                <button type="button" class="visual-choice-btn dot-style-btn" data-dot="classy">
+                  <span class="sample-dot-icon">✦</span>
+                  <span>Classy</span>
+                </button>
+                <button type="button" class="visual-choice-btn dot-style-btn" data-dot="extra-rounded">
+                  <span class="sample-dot-icon">⬤</span>
+                  <span>Extra R.</span>
+                </button>
+                <button type="button" class="visual-choice-btn dot-style-btn" data-dot="square">
+                  <span class="sample-dot-icon">■</span>
+                  <span>Square</span>
+                </button>
+              </div>
+
+              <!-- Color Type Radio -->
+              <div style="display: flex; gap: 16px; margin: 14px 0 10px;">
+                <label style="font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                  <input type="radio" name="dotColorMode" value="gradient" checked />
+                  <span>Gradient Color</span>
+                </label>
+                <label style="font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                  <input type="radio" name="dotColorMode" value="single" />
+                  <span>Single Color</span>
+                </label>
+              </div>
+
+              <!-- Color Pickers -->
+              <div class="color-picker-row">
+                <div class="color-input-wrapper">
+                  <input type="color" id="dotColor1" class="color-picker-native" value="#F59E0B" />
+                </div>
+                <input type="text" id="dotColor1-hex" class="color-hex-input" value="#F59E0B" maxlength="7" />
+                <span class="text-xs text-slate-400">Primary Color</span>
+              </div>
+
+              <!-- Gradient Sub-Controls -->
+              <div id="dot-gradient-controls">
+                <div class="color-picker-row">
+                  <div class="color-input-wrapper">
+                    <input type="color" id="dotColor2" class="color-picker-native" value="#B45309" />
+                  </div>
+                  <input type="text" id="dotColor2-hex" class="color-hex-input" value="#B45309" maxlength="7" />
+                  <span class="text-xs text-slate-400">Gradient End Color</span>
+                </div>
+
+                <div class="slider-control-group">
+                  <div class="slider-header">
+                    <span>Gradient Angle</span>
+                    <span id="dotGradientAngle-val">45°</span>
+                  </div>
+                  <input type="range" id="dotGradientAngle" class="range-slider" min="0" max="360" value="45" />
+                </div>
+              </div>
+
+              <!-- Quick Swatches -->
+              <div style="margin-top: 10px;">
+                <span class="text-xs text-slate-400">Luxury Palette Swatches:</span>
+                <div class="palette-swatches-row">
+                  <div class="palette-swatch" style="background: linear-gradient(135deg, #F59E0B, #B45309);" data-c1="#F59E0B" data-c2="#B45309" title="Royal Gold"></div>
+                  <div class="palette-swatch" style="background: linear-gradient(135deg, #00F5FF, #FF007F);" data-c1="#00F5FF" data-c2="#FF007F" title="Cyberpunk"></div>
+                  <div class="palette-swatch" style="background: linear-gradient(135deg, #10B981, #047857);" data-c1="#10B981" data-c2="#047857" title="Emerald Nature"></div>
+                  <div class="palette-swatch" style="background: linear-gradient(135deg, #E11D48, #881337);" data-c1="#E11D48" data-c2="#881337" title="Ruby Royale"></div>
+                  <div class="palette-swatch" style="background: linear-gradient(135deg, #8B5CF6, #F97316);" data-c1="#8B5CF6" data-c2="#F97316" title="Sunset Horizon"></div>
+                  <div class="palette-swatch" style="background: linear-gradient(135deg, #06B6D4, #1D4ED8);" data-c1="#06B6D4" data-c2="#1D4ED8" title="Ocean Azure"></div>
+                  <div class="palette-swatch" style="background: #111827;" data-c1="#111827" data-c2="#111827" title="Monochrome Dark"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Corner Eyes (Frames & Dots) -->
+          <div id="section-corners" class="accordion-section">
+            <div class="accordion-header" onclick="RoyalApp.switchAccordion('corners')">
+              <span>👁️ Corner Eyes (Frame & Ball)</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <label class="form-label">Outer Eye Frame Shape</label>
+              <div class="visual-btn-grid">
+                <button type="button" class="visual-choice-btn corner-square-btn active" data-style="extra-rounded">
+                  <span>▢</span>
+                  <span>Extra Rounded</span>
+                </button>
+                <button type="button" class="visual-choice-btn corner-square-btn" data-style="square">
+                  <span>■</span>
+                  <span>Square</span>
+                </button>
+                <button type="button" class="visual-choice-btn corner-square-btn" data-style="dot">
+                  <span>◯</span>
+                  <span>Circle</span>
+                </button>
+              </div>
+
+              <label class="form-label">Inner Eye Ball Shape</label>
+              <div class="visual-btn-grid">
+                <button type="button" class="visual-choice-btn corner-dot-btn active" data-style="dot">
+                  <span>●</span>
+                  <span>Circle Dot</span>
+                </button>
+                <button type="button" class="visual-choice-btn corner-dot-btn" data-style="square">
+                  <span>■</span>
+                  <span>Square</span>
+                </button>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0;">
+                <input type="checkbox" id="linkCornerColors" />
+                <label for="linkCornerColors" style="font-size: 13px; cursor: pointer;">Sync eye colors automatically with body dots</label>
+              </div>
+
+              <div id="independent-corner-colors">
+                <div class="color-picker-row">
+                  <div class="color-input-wrapper">
+                    <input type="color" id="cornerSquareColor" class="color-picker-native" value="#D97706" />
+                  </div>
+                  <input type="text" id="cornerSquareColor-hex" class="color-hex-input" value="#D97706" maxlength="7" />
+                  <span class="text-xs text-slate-400">Outer Eye Frame Color</span>
+                </div>
+                <div class="color-picker-row">
+                  <div class="color-input-wrapper">
+                    <input type="color" id="cornerDotColor" class="color-picker-native" value="#92400E" />
+                  </div>
+                  <input type="text" id="cornerDotColor-hex" class="color-hex-input" value="#92400E" maxlength="7" />
+                  <span class="text-xs text-slate-400">Inner Eye Ball Color</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Background -->
+          <div id="section-background" class="accordion-section">
+            <div class="accordion-header" onclick="RoyalApp.switchAccordion('background')">
+              <span>🖼️ Background & Transparency</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                <input type="checkbox" id="bgTransparent" />
+                <label for="bgTransparent" style="font-size: 13px; cursor: pointer; font-weight: 600;">Transparent Background (Perfect for PNG & stickers!)</label>
+              </div>
+
+              <div id="bg-color-control-box">
+                <div class="color-picker-row">
+                  <div class="color-input-wrapper">
+                    <input type="color" id="bgColor" class="color-picker-native" value="#0F172A" />
+                  </div>
+                  <input type="text" id="bgColor-hex" class="color-hex-input" value="#0F172A" maxlength="7" />
+                  <span class="text-xs text-slate-400">Background Color</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Logo & Center Icon -->
+          <div id="section-logo" class="accordion-section">
+            <div class="accordion-header" onclick="RoyalApp.switchAccordion('logo')">
+              <span>👑 Logo & Center Icon</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <label class="form-label">Built-in Brand Icons (1-Click)</label>
+              <div id="preset-icons-grid" class="preset-icons-grid">
+                <!-- Injected via JavaScript -->
+              </div>
+
+              <div style="margin: 18px 0 14px; border-top: 1px solid var(--bg-card-border); padding-top: 14px;">
+                <label class="form-label">Or Upload Your Custom Logo (PNG / SVG / JPG)</label>
+                <input type="file" id="custom-logo-upload" accept="image/*" class="form-input" />
+                <div id="custom-logo-preview-box" style="display: none; align-items: center; margin-top: 8px;"></div>
+              </div>
+
+              <div class="slider-control-group">
+                <div class="slider-header">
+                  <span>Logo Size</span>
+                  <span id="logoSize-val">36%</span>
+                </div>
+                <input type="range" id="logoSize" class="range-slider" min="0.15" max="0.48" step="0.01" value="0.36" />
+              </div>
+
+              <div class="slider-control-group">
+                <div class="slider-header">
+                  <span>Logo Margin / Padding</span>
+                  <span id="logoMargin-val">6px</span>
+                </div>
+                <input type="range" id="logoMargin" class="range-slider" min="0" max="20" value="6" />
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+                <input type="checkbox" id="hideBackgroundDots" checked />
+                <label for="hideBackgroundDots" style="font-size: 13px; cursor: pointer;">Remove QR dots behind logo (Clean cutout)</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Frames & Badges ("SCAN ME") -->
+          <div id="section-frames" class="accordion-section">
+            <div class="accordion-header" onclick="RoyalApp.switchAccordion('frames')">
+              <span>🏷️ Frames & "SCAN ME" Badges</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <label class="form-label">Frame Layout</label>
+              <div class="visual-btn-grid">
+                <button type="button" class="visual-choice-btn frame-style-btn active" data-frame="bottom-banner">
+                  <span>🏷️</span>
+                  <span>Bottom Banner</span>
+                </button>
+                <button type="button" class="visual-choice-btn frame-style-btn" data-frame="top-banner">
+                  <span>🔝</span>
+                  <span>Top Banner</span>
+                </button>
+                <button type="button" class="visual-choice-btn frame-style-btn" data-frame="polaroid">
+                  <span>📷</span>
+                  <span>Polaroid Card</span>
+                </button>
+                <button type="button" class="visual-choice-btn frame-style-btn" data-frame="badge">
+                  <span>🔖</span>
+                  <span>Pill Badge</span>
+                </button>
+                <button type="button" class="visual-choice-btn frame-style-btn" data-frame="none">
+                  <span>✕</span>
+                  <span>No Frame</span>
+                </button>
+              </div>
+
+              <div id="frame-options-panel">
+                <div class="form-group">
+                  <label class="form-label" for="frameText">Frame Text Banner</label>
+                  <input type="text" id="frameText" class="form-input" value="SCAN ME" maxlength="28" />
+                </div>
+
+                <div class="form-grid-2">
+                  <div>
+                    <label class="form-label">Banner Background</label>
+                    <div class="color-picker-row">
+                      <div class="color-input-wrapper">
+                        <input type="color" id="frameBgColor" class="color-picker-native" value="#1E293B" />
+                      </div>
+                      <input type="text" id="frameBgColor-hex" class="color-hex-input" value="#1E293B" maxlength="7" />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="form-label">Text Color</label>
+                    <div class="color-picker-row">
+                      <div class="color-input-wrapper">
+                        <input type="color" id="frameTextColor" class="color-picker-native" value="#FBBF24" />
+                      </div>
+                      <input type="text" id="frameTextColor-hex" class="color-hex-input" value="#FBBF24" maxlength="7" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Advanced & Export -->
+          <div id="section-advanced" class="accordion-section">
+            <div class="accordion-header" onclick="RoyalApp.switchAccordion('advanced')">
+              <span>⚙️ Margin & Error Correction</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="slider-control-group">
+                <div class="slider-header">
+                  <span>Quiet Zone Margin</span>
+                  <span id="marginSlider-val">8px</span>
+                </div>
+                <input type="range" id="marginSlider" class="range-slider" min="0" max="40" value="8" />
+              </div>
+
+              <label class="form-label" style="margin-top: 14px;">Error Correction Level (Redundancy)</label>
+              <div class="visual-btn-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <button type="button" class="visual-choice-btn ecl-btn" data-ecl="L">
+                  <span class="font-bold">L (7%)</span>
+                  <span class="text-[10px] text-slate-400">Smallest</span>
+                </button>
+                <button type="button" class="visual-choice-btn ecl-btn" data-ecl="M">
+                  <span class="font-bold">M (15%)</span>
+                  <span class="text-[10px] text-slate-400">Standard</span>
+                </button>
+                <button type="button" class="visual-choice-btn ecl-btn active" data-ecl="Q">
+                  <span class="font-bold">Q (25%)</span>
+                  <span class="text-[10px] text-slate-400">High</span>
+                </button>
+                <button type="button" class="visual-choice-btn ecl-btn" data-ecl="H">
+                  <span class="font-bold">H (30%)</span>
+                  <span class="text-[10px] text-slate-400">Best for Logo</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Right Column: Live Sticky Preview & Actions -->
+      <aside class="preview-sticky-col">
+        <div class="preview-card">
+          <!-- Live Header & Scannability Meter -->
+          <div class="preview-header">
+            <span class="text-sm font-bold tracking-tight">Live Interactive Preview</span>
+            <div id="scannability-badge" class="quality-badge quality-excellent">
+              <span>✓</span> <span>100% Readable</span>
+            </div>
+          </div>
+
+          <!-- QR Preview Box -->
+          <div class="qr-preview-wrapper">
+            <div id="qr-preview-box" class="qr-box">
+              <!-- Live QR renders here -->
+            </div>
+          </div>
+
+          <!-- Decoded Snippet Inspector -->
+          <div class="payload-snippet">
+            <div style="font-size: 11px; font-weight: 700; color: #64748B; margin-bottom: 2px;">PAYLOAD DATA:</div>
+            <div id="payload-data-preview">https://github.com</div>
+            <div id="test-scan-result" style="margin-top: 4px; font-size: 11px;"></div>
+          </div>
+
+          <!-- Quick Tools -->
+          <div class="quick-tools-row">
+            <button type="button" class="btn-secondary" onclick="RoyalApp.copyClipboard()">
+              <span>📋</span> Copy Image
+            </button>
+            <button type="button" class="btn-secondary" onclick="RoyalApp.generator.evaluateScannability()">
+              <span>🔍</span> Verify Scanner
+            </button>
+          </div>
+
+          <!-- Export Hub -->
+          <div class="export-section">
+            <div class="export-section-title">
+              <span>Export Resolution:</span>
+              <select id="export-resolution" class="form-select" style="width: auto; padding: 4px 10px; font-size: 12px;">
+                <option value="512">512 × 512 px (Web)</option>
+                <option value="1024" selected>1024 × 1024 px (HD - Recommended)</option>
+                <option value="2048">2048 × 2048 px (2K Ultra HD - Print)</option>
+                <option value="4096">4096 × 4096 px (4K Master Print)</option>
+              </select>
+            </div>
+
+            <!-- Main High-Res PNG Button -->
+            <button type="button" class="btn-download-primary" onclick="RoyalApp.download('png')">
+              <span>📥</span> Download High-Res PNG
+            </button>
+
+            <!-- Other Formats Grid -->
+            <div class="export-formats-grid">
+              <button type="button" class="btn-format" onclick="RoyalApp.download('svg')">
+                SVG (Vector)
+              </button>
+              <button type="button" class="btn-format" onclick="RoyalApp.download('pdf')">
+                PDF (Print)
+              </button>
+              <button type="button" class="btn-format" onclick="RoyalApp.download('webp')">
+                WEBP
+              </button>
+              <button type="button" class="btn-format" onclick="RoyalApp.download('jpeg')">
+                JPEG
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p><strong>RoyalQR Studio</strong> — Free & Open-Source Client-Side QR Generator. No tracking, zero server calls.</p>
+      <p style="margin-top: 6px; font-size: 12px; color: #64748B;">Ready to push to GitHub and host freely on GitHub Pages!</p>
+    </footer>
+  </div>
+
+  <!-- Templates / Presets Modal -->
+  <div id="templates-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">✨ Royalty Design Presets</h3>
+        <button type="button" class="btn-close-modal" onclick="RoyalApp.closeModal('templates-modal')">✕</button>
+      </div>
+      <p class="text-sm text-slate-400" style="margin-bottom: 18px;">Click any preset to apply instant designer styling with optimal scannability.</p>
+      <div id="templates-grid" class="templates-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- History Drawer -->
+  <aside id="history-drawer" class="history-drawer">
+    <div class="modal-header">
+      <h3 class="modal-title">🕒 Saved QR Codes</h3>
+      <button type="button" class="btn-close-modal" onclick="RoyalApp.toggleHistoryDrawer()">✕</button>
+    </div>
+    <div id="history-list" class="history-list">
+      <!-- Rendered by JS -->
+    </div>
+    <div style="margin-top: auto; border-top: 1px solid #1E293B; padding-top: 14px;">
+      <button type="button" class="btn-secondary" style="width: 100%; color: #EF4444;" onclick="HistoryManager.clearAll()">
+        Clear All History
+      </button>
+    </div>
+  </aside>
+
+  <!-- Toast Notification -->
+  <div id="toast-notice" class="toast-notice"></div>
+
+  <!-- Scripts -->
+  <!-- 1. Offline-capable local vendor libraries -->
+  <script src="js/vendor/qr-code-styling.js"></script>
+  <script src="js/vendor/jspdf.umd.min.js"></script>
+  <script src="js/vendor/jsqr.min.js"></script>
+
+  <!-- 2. Preset Data & App Logic -->
+  <script src="assets/icons/icons.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/generator.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
