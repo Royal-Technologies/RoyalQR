@@ -1,124 +1,109 @@
-# 👑 RoyalQR Studio - Next-Gen Custom QR Code Generator
+# 👑 RoyalQR Studio
 
 > **The Ultimate, High-Resolution, 100% Client-Side Custom QR Code Studio.**  
-> Adobe Express-এর থেকেও বহুগুণ শক্তিশালী এবং ফিচার-সমৃদ্ধ QR Code Generator — কোনো সার্ভার বা PHP ব্যাকএন্ড ছাড়াই ১০০% ক্লায়েন্ট-সাইড ব্রাউজারে চলে এবং বিনামূল্যে সরাসরি **GitHub Pages**-এ হোস্ট করা যায়!
+> A feature-rich, high-performance alternative to Adobe Express QR Code Generator. Generates fully styled QR codes entirely client-side with zero server calls, zero tracking, and native 1-click **GitHub Pages** deployment.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue.svg)](https://pages.github.com/)
+[![Pure JavaScript](https://img.shields.io/badge/Zero%20Backend-100%25%20Client--Side-green.svg)](#)
 
 ---
 
-## 🌟 কেন এটি Adobe Express থেকে বহুগুণ ভালো? (Feature Comparison)
+## 🌟 Why RoyalQR Studio? (Feature Comparison)
 
-| ফিচার | Adobe Express QR | **👑 RoyalQR Studio** |
+| Feature | Adobe Express Free QR | 👑 **RoyalQR Studio** |
 |---|---|---|
-| **ব্যাকএন্ড / সার্ভার প্রয়োজন** | ক্লাউড ও অ্যাকাউন্ট লগইন | **০% সার্ভার (১০০% ক্লায়েন্ট-সাইড ব্রাউজার)** |
-| **GitHub Pages সাপোর্ট** | ❌ না | **✅ সরাসরি ১-ক্লিকে GitHub Pages-এ লাইভ** |
-| **ডেটা টাইপ সাপোর্ট** | শুধু URL / Text | **১১+ টাইপ**: URL, Text, Wi-Fi, vCard, WhatsApp, SMS, Email, Phone, Crypto, Socials, Event |
-| **ডট / বডি প্যাটার্ন** | মাত্র ৫টি বেসিক স্টাইল | **৬টি এক্সক্লুসিভ প্যাটার্ন**: Square, Dots, Rounded, Extra-Rounded, Classy, Classy Rounded |
-| **কালার ও গ্রেডিয়েন্ট** | সিঙ্গেল কালার | **Single Color + Linear & Radial Gradient (০° থেকে ৩৬০° অ্যাঙ্গেল)** |
-| **কর্নার আইজ (Corner Eyes)** | আলাদা কালার করা যায় না | **Outer Square & Inner Dot উভয়ের আকার ও রঙ স্বাধীনভাবে পরিবর্তনযোগ্য** |
-| **ব্যাকগ্রাউন্ড** | শুধু সাদা বা সিঙ্গেল | **সলিড কালার + ফুল ট্রান্সপারেন্ট (Transparent PNG / স্টিকার রেডি)** |
-| **লোগো ও আইকন** | সীমাবদ্ধ / অ্যাকাউন্ট দরকার | **যেকোনো Custom Logo আপলোড + ১২+ Built-in ব্র্যান্ড আইকন (WhatsApp, WiFi, Insta, etc.)** |
-| **ফ্রেম / ব্যাজ ("SCAN ME")** | খুব কম | **৫টি ডিজাইন ফ্রেম**: Bottom Banner, Top Banner, Polaroid Card, Pill Badge + কাস্টম টেক্সট |
-| **এক্সপোর্ট রেজোলিউশন** | লো / মিডিয়াম | **512px, 1024px (HD), 2048px (2K), 4096px (4K Ultra Print Ready)** |
-| **ডাউনলোড ফরম্যাট** | PNG, JPG | **PNG, SVG (ভেক্টর লসলেস), PDF (প্রিন্ট রেডি A4), WEBP, JPEG** |
-| **ক্লিপবোর্ড কপি** | ❌ না | **✅ ১-ক্লিকে সরাসরি ক্লিপবোর্ডে কপি** (Photoshop/Word-এ পেস্ট করার জন্য) |
-| **বিল্ট-ইন স্ক্যানার / টেস্ট** | ❌ না | **✅ লাইভ ইন-ব্রাউজার QR Verifier (স্ক্যানেবিলিটি টেস্ট মিটার)** |
-| **ডিজাইন টেমপ্লেট / প্রিসেট** | ❌ না | **✅ ৮টি লাক্সারি প্রি-বিল্ট ডিজাইনার টেমপ্লেট** (Royal Gold, Cyberpunk, Velvet, ইত্যাদি) |
-| **হিস্ট্রি ও সেভ** | ❌ না | **✅ লোকাল হিস্ট্রি ড্রয়ার** (আগের জেনারেট করা কোডগুলো রিলোড বা ডাউনলোড করার সুবিধা) |
-| **প্রাইভেসি** | অ্যাডোবির সার্ভারে লগ হয় | **🔒 ১০০% প্রাইভেট — কোনো ডেটা আপনার ব্রাউজার ছেড়ে বাইরে যায় না** |
+| **Backend / Server** | Cloud & Adobe Account Required | **100% Client-Side (Zero Server Overhead)** |
+| **Hosting on GitHub Pages** | ❌ No | **✅ 1-Click Static Deployment** |
+| **Supported Data Types** | Basic URL / Plain Text | **11+ Types**: URL, Text, Wi-Fi, vCard, WhatsApp, SMS, Email, Phone, Crypto, Socials, Events |
+| **Dot & Body Patterns** | 5 Basic Styles | **6 Advanced Patterns**: Classy Rounded, Dots, Rounded, Classy, Extra-Rounded, Square |
+| **Color & Gradients** | Flat Solid Color Only | **Single Color + Linear & Radial Gradients (0°–360° Angle Control)** |
+| **Corner Eyes Customization** | Locked to dot style | **Independent Shapes & Colors for Outer Frame & Inner Eye Ball** |
+| **Background Options** | Solid White / Basic Color | **Solid Colors + Full Transparent PNG Mode (Sticker & Print Ready)** |
+| **Logos & Watermarks** | Restricted / Login Wall | **Custom Image Upload + 12 Built-in Vector Brand Icons** (WhatsApp, YouTube, WiFi, GitHub, etc.) |
+| **Frames & "SCAN ME" Badges** | Very Limited | **5 Layouts**: Bottom Banner, Top Banner, Polaroid Card, Pill Badge + Custom Editable Typography |
+| **Export Resolutions** | Standard Screen Res | **512px, 1024px (HD), 2048px (2K Ultra HD), 4096px (4K Print Master)** |
+| **Export Formats** | PNG, JPG | **PNG, SVG (Lossless Vector), PDF (Print Ready Sheet), WEBP, JPEG** |
+| **Clipboard Support** | ❌ No | **✅ 1-Click Direct Copy to Clipboard** (Instant paste into Photoshop, Figma, or Word) |
+| **In-Browser Scanner Test** | ❌ No | **✅ Integrated QR Decoder** (Real-time scannability verification meter) |
+| **Design Presets** | ❌ No | **✅ 8 Curated Luxury Design Templates** (Royal Gold, Cyberpunk Neon, Emerald Nature, etc.) |
+| **History & Storage** | ❌ No | **✅ LocalStorage History Drawer** (Save, restore, and re-download recent codes offline) |
+| **Privacy & Security** | Data logged on Adobe servers | **🔒 100% Private (No data ever leaves your device)** |
 
 ---
 
-## 🚀 গিটহাবে পুশ ও GitHub Pages-এ লাইভ করার সহজ নিয়ম
+## 🚀 Live Deployment on GitHub Pages
 
-যেহেতু এটি সম্পূর্ণ **HTML5, CSS3 ও আধুনিক JavaScript (ES6+)** দিয়ে তৈরি এবং কোনো PHP ব্যাকএন্ড নেই, তাই এটি GitHub Pages-এ লাইভ করার নিয়ম একদম সহজ:
+Because this project is built entirely with modern web standards (**HTML5, CSS3, ES6+ JavaScript**) without PHP, Node servers, or bundlers, hosting on GitHub Pages is completely free and requires zero build steps:
 
-### ধাপ ১: গিট ইনিশিয়ালাইজ ও কমিট করুন
-
-টার্মিনালে এই কমান্ডগুলো রান করুন:
+### 1. Initialize & Push to GitHub
 
 ```bash
 git init
 git add .
 git commit -m "Initial release of RoyalQR Studio"
-```
-
-### ধাপ ২: গিটহাবে নতুন রিপোজিটরি তৈরি করে পুশ করুন
-
-1. GitHub-এ গিয়ে একটি নতুন রিপোজিটরি তৈরি করুন (যেমন: `RoyalQR`).
-2. আপনার তৈরি করা রিপোজিটরির লিঙ্ক দিয়ে নিচের কমান্ডগুলো রান করুন:
-
-```bash
 git branch -M main
-git remote add origin https://github.com/আপনার-ইউজারনেম/RoyalQR.git
+git remote add origin https://github.com/Royal-Technologies/RoyalQR.git
 git push -u origin main
 ```
 
-### ধাপ ৩: GitHub Pages অন করুন (ফ্রি লাইভ ওয়েবসাইট)
+### 2. Enable GitHub Pages
 
-1. আপনার GitHub রিপোজিটরিতে যান।
-2. **Settings** ট্যাবে ক্লিক করুন।
-3. বাম পাশের মেনু থেকে **Pages**-এ ক্লিক করুন।
-4. **Build and deployment** সেকশনে:
-   - **Source**: `Deploy from a branch` সিলেক্ট করুন।
-   - **Branch**: `main` সিলেক্ট করে ফোল্ডার `/ (root)` রেখে **Save** বাটনে চাপ দিন।
-5. ১-২ মিনিটের মধ্যে আপনার ওয়েবসাইট লাইভ হয়ে যাবে:  
-   👉 `https://আপনার-ইউজারনেম.github.io/RoyalQR/`
-
----
-
-## 🎨 মূল ফিচারসমূহ সংক্ষেপে
-
-1. **১১+ ডেটা টাইপ ইনপুট**:
-   - 🔗 **Website URL**: যেকোনো ওয়েবসাইটের অ্যাড্রেস।
-   - 📝 **Plain Text**: সাধারণ লেখা, নোট বা মেসেজ।
-   - 📶 **Wi-Fi Network**: SSID, পাসওয়ার্ড ও সিকিউরিটি টাইপ (স্ক্যান করলেই সরাসরি ওয়াইফাই কানেক্ট হয়ে যায়)।
-   - 👤 **vCard / Contact**: নাম, ফোন, ইমেইল, কোম্পানি, ওয়েবসাইট (স্ক্যান করলেই কন্ট্যাক্ট লিস্টে সেভ হবে)।
-   - 💬 **WhatsApp**: সরাসরি চ্যাট খোলার নম্বর ও প্রি-ফিল্ড মেসেজ।
-   - 📧 **Email**: মেইল অ্যাড্রেস, সাবজেক্ট ও বডি।
-   - 📞 **Phone**: সরাসরি ডায়াল করার নম্বর।
-   - 💬 **SMS**: প্রি-ফিল্ড টেক্সট মেসেজ।
-   - 💰 **Crypto**: Bitcoin, Ethereum, USDT ওয়ালেট অ্যাড্রেস ও অ্যামাউন্ট।
-   - 🌐 **Socials**: Instagram, YouTube, TikTok, X, LinkedIn, Facebook, GitHub।
-   - 📅 **Event**: ক্যালেন্ডার ইভেন্ট শিডিউল।
-
-2. **সম্পূর্ণ কাস্টমাইজেশন**:
-   - ডটের শেইপ: Classy Rounded, Rounded, Dots, Classy, Extra-Rounded, Square।
-   - লিনিয়ার ও রেডিয়াল গ্রেডিয়েন্ট কালার (যেকোনো অ্যাঙ্গেলে ঘুরানো যায়)।
-   - আইজের ফ্রেম ও ইনার বলের কালার আলাদাভাবে পরিবর্তন করার সুবিধা।
-   - ট্রান্সপারেন্ট ব্যাকগ্রাউন্ড।
-   - ফ্রেম / ব্যানার ("SCAN ME", "CONNECT WIFI" ইত্যাদি লেখার ফ্রেম)।
-   - কাস্টম লোগো আপলোড বা রেডিমেড আইকন যুক্ত করা।
-
-3. **হাই-কোয়ালিটি এক্সপোর্ট**:
-   - আল্ট্রা হাই-রেজোলিউশন (১০২৪px, ২০৪৮px, এমনকি ৪০৯৬px 4K মাস্টার প্রিন্ট)।
-   - PNG, SVG (ভেক্টর), PDF (ডকুমেন্ট), WEBP, JPEG ফরম্যাট।
+1. Navigate to your repository on GitHub (`https://github.com/Royal-Technologies/RoyalQR`).
+2. Make sure the repository visibility is set to **Public** (*Settings > General > Danger Zone > Change visibility > Make Public*).
+3. Go to the **Settings** tab.
+4. Select **Pages** from the left navigation menu.
+5. Under **Build and deployment**:
+   - **Source**: `Deploy from a branch`
+   - **Branch**: `main`
+   - **Folder**: `/ (root)`
+6. Click **Save**.
+7. Your app will be live within 1–2 minutes at:  
+   👉 `https://royal-technologies.github.io/RoyalQR/`
 
 ---
 
-## 🛠️ প্রোজেক্ট স্ট্রাকচার
+## 🎨 Supported Data Types
+
+- 🔗 **Website URL**: Web links with automatic protocol formatting.
+- 📝 **Plain Text**: Unformatted text, notes, and quotes.
+- 📶 **Wi-Fi Network**: Network SSID, password, and encryption type (WPA/WPA2/WEP/Open) for instant zero-type connection.
+- 👤 **vCard / Contact Card**: Name, phone, email, organization, title, URL, and physical address for 1-tap phonebook saving.
+- 💬 **WhatsApp**: Direct chat link with international phone number and pre-filled message.
+- 📧 **Email**: Recipient address with pre-configured subject and message body.
+- 📞 **Phone Number**: Direct tel link for instant smartphone dialing.
+- 💬 **SMS**: Phone number and pre-composed text message.
+- 💰 **Cryptocurrency**: Bitcoin, Ethereum, and USDT wallet addresses with optional amounts.
+- 🌐 **Social Profiles**: Direct links for Instagram, YouTube, TikTok, X (Twitter), LinkedIn, Facebook, and GitHub.
+- 📅 **Calendar Event**: iCalendar format with title, start/end timestamps, location, and description.
+
+---
+
+## 📁 Project Architecture
 
 ```
 RoyalQR/
-├── index.html              # মূল ইন্টারফেস ও কন্ট্রোল প্যানেল
+├── index.html              # Main responsive application interface & control hub
 ├── css/
-│   └── style.css           # রেসপনসিভ লাক্সারি ডার্ক ও লাইট থিম স্টাইল
+│   └── style.css           # Luxury dark/light themes, animations & responsive grid
 ├── js/
-│   ├── vendor/             # সম্পূর্ণ অফলাইনে চলার জন্য লোকাল ভেন্ডর লাইব্রেরি
+│   ├── vendor/             # Fully self-contained offline vendor libraries
 │   │   ├── qr-code-styling.js
 │   │   ├── jspdf.umd.min.js
 │   │   └── jsqr.min.js
-│   ├── generator.js        # কোর কিউআর কোড জেনারেশন, ফ্রেম ও এক্সপোর্ট ইঞ্জিন
-│   ├── templates.js        # ৮টি লাক্সারি ডিজাইনার প্রিসেট
-│   ├── history.js          # লোকালস্টোরেজ হিস্ট্রি ও সেভ ম্যানেজার
-│   └── app.js              # অ্যাপ কন্ট্রোলার, ইভেন্ট ও ফর্ম ম্যানেজার
+│   ├── generator.js        # Core QR code generation, framed canvas composite & export engine
+│   ├── templates.js        # 8 curated luxury designer presets
+│   ├── history.js          # LocalStorage history and saved items manager
+│   └── app.js              # State manager, form input orchestrator & live UI bindings
 ├── assets/
 │   └── icons/
-│       └── icons.js        # বিল্ট-ইন ভেক্টর ব্র্যান্ড আইকন
-├── README.md               # ডকুমেন্টেশন ও গিটহাব গাইড
-└── .gitignore
+│       └── icons.js        # Built-in vector brand icon dataset
+├── README.md               # Project documentation
+└── .gitignore              # Git ignore rules
 ```
 
 ---
 
-## 📄 লাইসেন্স
-MIT License — যে কেউ স্বাধীনভাবে ব্যবহার, পরিবর্তন বা ক্লায়েন্ট প্রোজেক্টে কাজে লাগাতে পারবেন।
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE) — free to use for personal, commercial, and client projects.
