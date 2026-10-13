@@ -197,7 +197,7 @@ const RoyalApp = {
       }
     }
 
-    if (!payload) payload = "https://github.com";
+    if (!payload) payload = "https://www.royaltechbd.com";
 
     const payloadPreview = document.getElementById("payload-data-preview");
     if (payloadPreview) {

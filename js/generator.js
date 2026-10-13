@@ -10,7 +10,7 @@ class RoyalQRGenerator {
   getDefaultConfig() {
     return {
       type: "url",
-      data: "https://github.com",
+      data: "https://www.royaltechbd.com",
       size: 340,
       margin: 8,
       errorCorrectionLevel: "Q", // high resilience
@@ -117,7 +117,7 @@ class RoyalQRGenerator {
       width: renderSize,
       height: renderSize,
       type: "canvas",
-      data: config.data || "https://github.com",
+      data: config.data || "https://www.royaltechbd.com",
       image: logoUrl || undefined,
       margin: parseInt(config.margin || 8, 10),
       qrOptions: {
